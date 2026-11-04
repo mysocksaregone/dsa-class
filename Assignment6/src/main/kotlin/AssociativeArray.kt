@@ -59,7 +59,18 @@ class LinkedHashTable<K,V> : AssociativeArray<K,V> {
 
     // hash
     private fun hash(k:K): Int {
-        return k.toString().toInt().mod(primes[currentPrime])
+
+        var h = 0
+        // manual string conversion to int by turning each character to ASCII val
+        // multiplied to 31 to shift bits around depending on order.
+        // if i didn't do this, then strings with the same characters would
+        // have the same value
+        for (c in k.toString()) {
+            h = h * 31 + c.code
+        }
+
+        return h.mod(primes[currentPrime])
+
     }
 
     // finding an entry
