@@ -59,7 +59,7 @@ class LinkedHashTable<K,V> : AssociativeArray<K,V> {
 
     // hash
     private fun hash(k:K): Int {
-        return k.toString().toInt() % primes[currentPrime]
+        return k.toString().toInt().mod(primes[currentPrime])
     }
 
     // finding an entry
@@ -72,7 +72,7 @@ class LinkedHashTable<K,V> : AssociativeArray<K,V> {
     private fun rehash() {
         // first check if we've made it to the end of our predetermined
         // primes list... if so just give up
-        if (currentPrime > primes.size - 1) return
+        if (currentPrime >= primes.size - 1) return
 
         currentPrime++
 
